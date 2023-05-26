@@ -1,0 +1,29 @@
+spring:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:8181/realms/VuongDo
+          jwk-set-uri: ${spring.security.oauth2.resource-server.jwt.issuer-uri}/protocol/openid-connect/certs
+
+  datasource:
+    url: jdbc:mysql://localhost:3307/keycloakdb?useSSL=false&serverTimezone=UTC
+    username: myuser
+    password: mypassword
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+server:
+  port: 8083
+
+jwt:
+  auth:
+    converter:
+      resource-id: vuongdo-RESTApi
+      principle-attribute: preferred_username
